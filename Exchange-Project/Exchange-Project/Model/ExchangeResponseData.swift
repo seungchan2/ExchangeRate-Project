@@ -14,4 +14,8 @@ struct ExchangeResponseData: Codable {
     let timestamp: Int
     let source: String
     let quotes: [String: Double]
+    
+    var quoteObjects: [Quote] {
+        return quotes.map { Quote(currencyCode: $0.key, exchangeRage: $0.value) }
+    }
 }
