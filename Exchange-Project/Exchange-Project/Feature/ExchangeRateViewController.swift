@@ -15,6 +15,7 @@ final class ExchangeRateViewController: UIViewController {
     private let cancelBag = CancelBag()
     private var selectedNation = CurrentValueSubject<Nation, Never>(.KRW)
     private let viewDidLoadEvent = PassthroughSubject<Void, Never>()
+    private let values = ["한국", "일본", "필리핀"]
     
     override func loadView() {
         self.view = originView
@@ -43,20 +44,28 @@ private extension ExchangeRateViewController {
     }
     
     func bind() {
+        viewDidLoadEvent.send(())
+
         let input = ExchangeViewModel.Input(viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher(),
                                             nationIsSelected: selectedNation.eraseToAnyPublisher(),
                                             inputTextFieldText: self.originView.amountTextField.publisher)
         
         let output = self.viewModel.transform(from: input, cancelBag: self.cancelBag)
-        
-        viewDidLoadEvent.send(())
-
+            
         output.selectedPrice
             .receive(on: RunLoop.main)
-            .sink { price in
-                print(price)
-                self.originView.exchangeRateLabel.text = price
+            .map { price in
+                return price 
             }
+            .assign(to: \.text, on: self.originView.exchangeRateLabel)
+            .store(in: self.cancelBag)
+        
+        output.totalPriceInformation
+            .receive(on: RunLoop.main)
+            .map { price in
+                return price
+            }
+            .assign(to: \.text, on: self.originView.priceInformationLabel)
             .store(in: self.cancelBag)
     }
 }

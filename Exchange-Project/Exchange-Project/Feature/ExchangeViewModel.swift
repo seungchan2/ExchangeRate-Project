@@ -38,12 +38,16 @@ final class ExchangeViewModel: ViewModelType {
     
     struct Output {
         let selectedPrice: AnyPublisher<String, Never>
+        let totalPriceInformation: AnyPublisher<String, Never>
     }
     
     func transform(from input: Input, cancelBag: CancelBag) -> Output {
         lazy var price = PassthroughSubject<Double, Never>()
         lazy var priceAmount = PassthroughSubject<String, Never>()
-        let output = Output(selectedPrice: priceAmount.eraseToAnyPublisher())
+        lazy var totalPriceAmount = PassthroughSubject<String, Never>()
+
+        let output = Output(selectedPrice: priceAmount.eraseToAnyPublisher(),
+                            totalPriceInformation: totalPriceAmount.eraseToAnyPublisher())
         
         input.viewDidLoadEvent
             .flatMap { _ in
@@ -96,11 +100,11 @@ final class ExchangeViewModel: ViewModelType {
             .sink { resultValue in
                 switch self.selectedNation.value {
                 case .KRW:
-                     print("\(resultValue.formattedString()) KRW")
+                    totalPriceAmount.send("수취금액은 \(resultValue.formattedString()) KRW 입니다")
                 case .JPY:
-                    print("\(resultValue.formattedString()) JPY")
+                    totalPriceAmount.send("수취금액은 \(resultValue.formattedString()) JPY 입니다")
                 case .PHP:
-                    print("\(resultValue.formattedString()) PHP")
+                    totalPriceAmount.send("수취금액은 \(resultValue.formattedString()) PHP 입니다")
                 }
             }
             .store(in: self.cancelBag)
