@@ -76,6 +76,12 @@ final class ExchangeRateView: UIView {
         return label
     }()
     
+    lazy var priceInformationLabel: UILabel = {
+        let label = UILabel()
+        label.text = "가격은"
+        return label
+    }()
+    
     let pickerView: UIPickerView = {
        let picker = UIPickerView()
         return picker
@@ -102,7 +108,7 @@ private extension ExchangeRateView {
          receptionLabel, receptionNationLabel,
          exchangeLabel, exchangeRateLabel,
          checkLabel, checkTimeLabel,
-         remittanceAmountLabel, amountTextField, usdLabel, pickerView].forEach {
+         remittanceAmountLabel, amountTextField, usdLabel, priceInformationLabel, pickerView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             addSubview($0)
         }
@@ -142,6 +148,9 @@ private extension ExchangeRateView {
         NSLayoutConstraint.activate([usdLabel.topAnchor.constraint(equalTo: remittanceAmountLabel.topAnchor),
                                      usdLabel.leadingAnchor.constraint(equalTo: amountTextField.trailingAnchor, constant: 3)])
         
+        NSLayoutConstraint.activate([priceInformationLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+                                     priceInformationLabel.topAnchor.constraint(equalTo: usdLabel.bottomAnchor, constant: 30)])
+
         NSLayoutConstraint.activate([pickerView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
                                      pickerView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
                                      pickerView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
