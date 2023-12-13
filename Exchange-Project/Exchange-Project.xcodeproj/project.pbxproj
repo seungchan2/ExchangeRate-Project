@@ -21,6 +21,9 @@
 		ECBF85812B2846F700D7C85D /* CancelBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBF85802B2846F700D7C85D /* CancelBag.swift */; };
 		ECBF85822B28494400D7C85D /* ExchangeRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBF85712B283CB300D7C85D /* ExchangeRateViewController.swift */; };
 		ECBF85892B2850B600D7C85D /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBF85882B2850B600D7C85D /* Config.swift */; };
+		ECBF858C2B285AD700D7C85D /* ExchangeRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBF858B2B285AD700D7C85D /* ExchangeRateView.swift */; };
+		ECBF85912B29934300D7C85D /* UITextField + Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBF85902B29934300D7C85D /* UITextField + Publisher.swift */; };
+		ECBF85932B29B9E800D7C85D /* Double +.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBF85922B29B9E800D7C85D /* Double +.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,9 @@
 		ECBF85802B2846F700D7C85D /* CancelBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
 		ECBF85842B28503F00D7C85D /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		ECBF85882B2850B600D7C85D /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		ECBF858B2B285AD700D7C85D /* ExchangeRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateView.swift; sourceTree = "<group>"; };
+		ECBF85902B29934300D7C85D /* UITextField + Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Publisher.swift"; sourceTree = "<group>"; };
+		ECBF85922B29B9E800D7C85D /* Double +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double +.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +168,7 @@
 			children = (
 				ECBF85712B283CB300D7C85D /* ExchangeRateViewController.swift */,
 				ECBF857B2B28461600D7C85D /* ExchangeViewModel.swift */,
+				ECBF858B2B285AD700D7C85D /* ExchangeRateView.swift */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -181,6 +188,8 @@
 				ECBF85802B2846F700D7C85D /* CancelBag.swift */,
 				ECBF85842B28503F00D7C85D /* Config.xcconfig */,
 				ECBF85882B2850B600D7C85D /* Config.swift */,
+				ECBF85902B29934300D7C85D /* UITextField + Publisher.swift */,
+				ECBF85922B29B9E800D7C85D /* Double +.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -333,8 +342,11 @@
 				ECBF85822B28494400D7C85D /* ExchangeRateViewController.swift in Sources */,
 				ECBF857A2B2845B900D7C85D /* ExchangeResponseData.swift in Sources */,
 				ECBF85892B2850B600D7C85D /* Config.swift in Sources */,
+				ECBF85932B29B9E800D7C85D /* Double +.swift in Sources */,
 				ECBF857C2B28461600D7C85D /* ExchangeViewModel.swift in Sources */,
 				ECBF85812B2846F700D7C85D /* CancelBag.swift in Sources */,
+				ECBF858C2B285AD700D7C85D /* ExchangeRateView.swift in Sources */,
+				ECBF85912B29934300D7C85D /* UITextField + Publisher.swift in Sources */,
 				ECBF85422B283C1300D7C85D /* AppDelegate.swift in Sources */,
 				ECBF85442B283C1300D7C85D /* SceneDelegate.swift in Sources */,
 				ECBF85782B283E8100D7C85D /* ExchangeRateService.swift in Sources */,
