@@ -42,16 +42,16 @@ private extension ExchangeRateViewController {
         self.originView.pickerView.delegate = self
         self.originView.pickerView.dataSource = self
     }
-    
+        
     func bind() {
-        viewDidLoadEvent.send(())
 
         let input = ExchangeViewModel.Input(viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher(),
                                             nationIsSelected: selectedNation.eraseToAnyPublisher(),
                                             inputTextFieldText: self.originView.amountTextField.publisher)
         
         let output = self.viewModel.transform(from: input, cancelBag: self.cancelBag)
-            
+        viewDidLoadEvent.send(())
+
         output.selectedPrice
             .receive(on: RunLoop.main)
             .map { price in
@@ -66,6 +66,12 @@ private extension ExchangeRateViewController {
                 return price
             }
             .assign(to: \.text, on: self.originView.priceInformationLabel)
+            .store(in: self.cancelBag)
+        
+        output.showToastMessage
+            .sink { data in
+                self.showToast(message: data)
+            }
             .store(in: self.cancelBag)
     }
 }
