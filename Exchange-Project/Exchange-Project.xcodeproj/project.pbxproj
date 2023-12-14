@@ -24,6 +24,8 @@
 		ECBF858C2B285AD700D7C85D /* ExchangeRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBF858B2B285AD700D7C85D /* ExchangeRateView.swift */; };
 		ECBF85912B29934300D7C85D /* UITextField + Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBF85902B29934300D7C85D /* UITextField + Publisher.swift */; };
 		ECBF85932B29B9E800D7C85D /* Double +.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBF85922B29B9E800D7C85D /* Double +.swift */; };
+		ECBF85982B2A0B8000D7C85D /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBF85972B2A0B8000D7C85D /* ToastView.swift */; };
+		ECBF859A2B2A112100D7C85D /* UIViewController +.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBF85992B2A112100D7C85D /* UIViewController +.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		ECBF858B2B285AD700D7C85D /* ExchangeRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateView.swift; sourceTree = "<group>"; };
 		ECBF85902B29934300D7C85D /* UITextField + Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Publisher.swift"; sourceTree = "<group>"; };
 		ECBF85922B29B9E800D7C85D /* Double +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double +.swift"; sourceTree = "<group>"; };
+		ECBF85972B2A0B8000D7C85D /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		ECBF85992B2A112100D7C85D /* UIViewController +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController +.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +194,8 @@
 				ECBF85882B2850B600D7C85D /* Config.swift */,
 				ECBF85902B29934300D7C85D /* UITextField + Publisher.swift */,
 				ECBF85922B29B9E800D7C85D /* Double +.swift */,
+				ECBF85992B2A112100D7C85D /* UIViewController +.swift */,
+				ECBF85972B2A0B8000D7C85D /* ToastView.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -340,12 +346,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECBF85822B28494400D7C85D /* ExchangeRateViewController.swift in Sources */,
+				ECBF859A2B2A112100D7C85D /* UIViewController +.swift in Sources */,
 				ECBF857A2B2845B900D7C85D /* ExchangeResponseData.swift in Sources */,
 				ECBF85892B2850B600D7C85D /* Config.swift in Sources */,
 				ECBF85932B29B9E800D7C85D /* Double +.swift in Sources */,
 				ECBF857C2B28461600D7C85D /* ExchangeViewModel.swift in Sources */,
 				ECBF85812B2846F700D7C85D /* CancelBag.swift in Sources */,
 				ECBF858C2B285AD700D7C85D /* ExchangeRateView.swift in Sources */,
+				ECBF85982B2A0B8000D7C85D /* ToastView.swift in Sources */,
 				ECBF85912B29934300D7C85D /* UITextField + Publisher.swift in Sources */,
 				ECBF85422B283C1300D7C85D /* AppDelegate.swift in Sources */,
 				ECBF85442B283C1300D7C85D /* SceneDelegate.swift in Sources */,
