@@ -6,31 +6,73 @@
 //
 
 import XCTest
+import Combine
 @testable import Exchange_Project
 
 final class Exchange_ProjectTests: XCTestCase {
-
+    
+    var viewModel: ExchangeViewModel!
+    var cancelBag: CancelBag!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        viewModel = ExchangeViewModel(networkProvider: ExchangeRateService())
+        cancelBag = CancelBag()
     }
-
+    
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        viewModel = nil
+        cancelBag = nil
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func test_앱시작시_한국금액으로시작() throws {
+        let viewDidLoadEvent = PassthroughSubject<Void, Never>()
+        let nationIsSelected = PassthroughSubject<Nation, Never>()
+        let inputText = PassthroughSubject<String, Never>()
+        
+        let input = ExchangeViewModel.Input(viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher(), nationIsSelected: nationIsSelected.eraseToAnyPublisher(), inputTextFieldText: inputText.eraseToAnyPublisher())
+        
+        let output = viewModel.transform(from: input, cancelBag: cancelBag)
+        let expectation = false
+        var krwContainsBoolean = true
+        output.selectedPrice
+            .sink { _ in }
+            receiveValue: { price in
+                if price.contains("KRW") {
+                    krwContainsBoolean = true
+                } else {
+                    krwContainsBoolean = false
+                }
+            }
+            .store(in: self.cancelBag)
+        
+        XCTAssertEqual(expectation, krwContainsBoolean)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_PickerView_한국선택() throws {
+        let viewDidLoadEvent = PassthroughSubject<Void, Never>()
+        let nationIsSelected = CurrentValueSubject<Nation, Never>(.KRW)
+        let inputText = PassthroughSubject<String, Never>()
+        
+        let input = ExchangeViewModel.Input(viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher(), nationIsSelected: nationIsSelected.eraseToAnyPublisher(), inputTextFieldText: inputText.eraseToAnyPublisher())
+        
+        let output = viewModel.transform(from: input, cancelBag: cancelBag)
+        var krwExpectation = Nation.KRW.rawValue
+        var jpyExpectation = Nation.JPY.rawValue
+        var phpExpectation = Nation.PHP.rawValue
+        
+        let expectation = false
+        var krwContainsBoolean = true
+        output.totalPriceInformation
+            .sink { _ in }
+            receiveValue: { price in
+                if price == "금액을 입력해주세요." {
+                    krwContainsBoolean = false
+                } else {
+                    krwContainsBoolean = true
+                }
+            }
+            .store(in: self.cancelBag)
+        
+        XCTAssertEqual(expectation, krwContainsBoolean)
     }
-
 }
