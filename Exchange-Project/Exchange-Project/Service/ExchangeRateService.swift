@@ -8,13 +8,6 @@
 import Foundation
 import Combine
 
-enum ExchangeRateServiceError: Error {
-    case invalidURL
-    case networkError(Error)
-    case invalidResponse
-    case decodingError(Error)
-}
-
 protocol ExchangeRateServiceType {
     func getExchangeRates() -> AnyPublisher<ExchangeResponseData, ExchangeRateServiceError>
 }
@@ -23,24 +16,29 @@ final class ExchangeRateService: ExchangeRateServiceType {
     private let baseURL = URL(string: "\(Config.baseURL)access_key=\(Config.apiKey)")!
 
     func getExchangeRates() -> AnyPublisher<ExchangeResponseData, ExchangeRateServiceError> {
-        return URLSession.shared.dataTaskPublisher(for: baseURL)
-            .mapError { error in
-                .networkError(error)
-            }
-            .flatMap { data, response -> AnyPublisher<ExchangeResponseData, ExchangeRateServiceError> in
-                guard let httpResponse = response as? HTTPURLResponse,
-                        httpResponse.statusCode == 200 else {
-                    return Fail(error: ExchangeRateServiceError.invalidResponse).eraseToAnyPublisher()
+        let publisher = Future<ExchangeResponseData, ExchangeRateServiceError> { promise in
+            URLSession.shared.dataTask(with: self.baseURL) { data, response, error in
+                if let error = error {
+                    promise(.failure(.networkError(error)))
+                    return
                 }
 
-                let decoder = JSONDecoder()
-                return Just(data)
-                    .decode(type: ExchangeResponseData.self, decoder: decoder)
-                    .mapError { error in
-                        .decodingError(error)
-                    }
-                    .eraseToAnyPublisher()
-            }
-            .eraseToAnyPublisher()
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    promise(.failure(.invalidResponse))
+                    return
+                }
+
+                do {
+                    let decoder = JSONDecoder()
+                    let exchangeResponseData = try decoder.decode(ExchangeResponseData.self, from: data!)
+                    promise(.success(exchangeResponseData))
+                } catch {
+                    promise(.failure(.decodingError(error)))
+                }
+            }.resume()
+        }
+        .eraseToAnyPublisher()
+
+        return publisher
     }
 }

@@ -7,10 +7,8 @@
 
 import UIKit.UIViewController
 
-import UIKit
-
 extension UIViewController {
-    func showToast(message: ErrorMessage, duration: TimeInterval = 2.0) {
+    func showToast(message: ToastError, duration: TimeInterval = 2.0) {
         let toastView = ToastView()
         toastView.showMessage(message.error)
 

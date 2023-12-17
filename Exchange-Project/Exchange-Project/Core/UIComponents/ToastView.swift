@@ -7,27 +7,11 @@
 
 import UIKit
 
-@frozen
-enum ErrorMessage {
-    case lessZero
-    case overTenThousands
-    
-    var error: String {
-        switch self {
-        case .lessZero:
-            return "1"
-        case .overTenThousands:
-            return "2"
-        }
-    }
-}
-
 final class ToastView: UIView {
-    private var style: ErrorMessage
-    
+    private var style: ToastError
     private let label = UILabel()
     
-    init(style: ErrorMessage = ErrorMessage.lessZero) {
+    init(style: ToastError = ToastError.lessZero) {
         self.style = style
         super.init(frame: .zero)
         setupView()
@@ -36,6 +20,10 @@ final class ToastView: UIView {
     
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        print("ToastView deinit")
     }
     
     private func setupView() {
