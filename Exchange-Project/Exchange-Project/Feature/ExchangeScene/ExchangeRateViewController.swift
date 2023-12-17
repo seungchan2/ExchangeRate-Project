@@ -9,17 +9,16 @@ import Combine
 import UIKit
 
 final class ExchangeRateViewController: UIViewController {
+    // MARK: Properties
     
     private var viewModel: ExchangeViewModel
     private let originView = ExchangeRateView()
     private let cancelBag = CancelBag()
     private var selectedNation = CurrentValueSubject<Nation, Never>(.KRW)
     private let viewDidLoadEvent = PassthroughSubject<Void, Never>()
-    private let values = ["한국", "일본", "필리핀"]
+    private let nationArray = ["한국", "일본", "필리핀"]
     
-    override func loadView() {
-        self.view = originView
-    }
+    // MARK: Initializing
     
     init(viewModel: ExchangeViewModel) {
         self.viewModel = viewModel
@@ -30,12 +29,19 @@ final class ExchangeRateViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Override functions
+    override func loadView() {
+        self.view = originView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.assignDelegation()
         self.bind()
     }
+    
 }
+// MARK: - Functions
 
 private extension ExchangeRateViewController {
     func assignDelegation() {
@@ -44,7 +50,6 @@ private extension ExchangeRateViewController {
     }
         
     func bind() {
-
         let input = ExchangeViewModel.Input(viewDidLoadEvent: viewDidLoadEvent.eraseToAnyPublisher(),
                                             nationIsSelected: selectedNation.eraseToAnyPublisher(),
                                             inputTextFieldText: self.originView.amountTextField.publisher)
@@ -54,10 +59,10 @@ private extension ExchangeRateViewController {
 
         output.selectedPrice
             .receive(on: RunLoop.main)
-            .map { price in
-                return price 
+            .sink { [weak self] price in
+                self?.originView.exchangeRateLabel.text = price
+                self?.originView.checkTimeLabel.text = Date().formattedTime
             }
-            .assign(to: \.text, on: self.originView.exchangeRateLabel)
             .store(in: self.cancelBag)
         
         output.totalPriceInformation
@@ -76,6 +81,8 @@ private extension ExchangeRateViewController {
     }
 }
 
+// MARK: - UIPickerViewDelegate & UIPickerViewDataSource
+
 extension ExchangeRateViewController: UIPickerViewDelegate {}
 
 extension ExchangeRateViewController: UIPickerViewDataSource {
@@ -83,26 +90,35 @@ extension ExchangeRateViewController: UIPickerViewDataSource {
         return 1
     }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return values.count
+    func pickerView(_ pickerView: UIPickerView,
+                    numberOfRowsInComponent component: Int) -> Int {
+        return nationArray.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return values[row]
+    func pickerView(_ pickerView: UIPickerView,
+                    titleForRow row: Int,
+                    forComponent component: Int) -> String? {
+        return nationArray[row]
     }
     
-    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+    func pickerView(_ pickerView: UIPickerView,
+                    rowHeightForComponent component: Int) -> CGFloat {
         return 60
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView,
+                    didSelectRow row: Int,
+                    inComponent component: Int) {
         switch row {
         case 0:
             self.selectedNation.send(.KRW)
+            self.originView.amountTextField.text = ""
         case 1:
             self.selectedNation.send(.JPY)
+            self.originView.amountTextField.text = ""
         case 2:
             self.selectedNation.send(.PHP)
+            self.originView.amountTextField.text = ""
         default:
             print("default")
         }

@@ -8,85 +8,38 @@
 import UIKit
 
 final class ExchangeRateView: UIView {
+    // MARK: Properties
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "환율 계산"
-        return label
-    }()
-    
-    private let remittanceLabel: UILabel = {
-        let label = UILabel()
-        label.text = "송금국가 : 미국 (USD)"
-        return label
-    }()
-    
-    private let receptionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "수취국가 :"
-        return label
-    }()
-    
-    let receptionNationLabel: UILabel = {
-        let label = UILabel()
-        label.text = "한국 (KRW)"
-        return label
-    }()
-    
-    let exchangeLabel: UILabel = {
-        let label = UILabel()
-        label.text = "환율 :"
-        return label
-    }()
-    
-    let exchangeRateLabel: UILabel = {
-        let label = UILabel()
-        label.text = "11111"
-        return label
-    }()
-    
-    let checkLabel: UILabel = {
-        let label = UILabel()
-        label.text = "조회시간"
-        return label
-    }()
-    
-    let checkTimeLabel: UILabel = {
-        let label = UILabel()
-        label.text = "\(Date())"
-        return label
-    }()
-
-    let remittanceAmountLabel: UILabel = {
-        let label = UILabel()
-        label.text = "송금액 :"
-        return label
-    }()
+    private let titleLabel = MainLabel(title: "환율 계산")
+    private let remittanceLabel = MainLabel(title: "송금국가 : 미국 (USD")
+    private let receptionLabel = MainLabel(title: "수취국가 :")
+    let receptionNationLabel = MainLabel(title: "한국 (KRW)")
+    private let exchangeLabel = MainLabel(title: "환율 :")
+    let exchangeRateLabel = MainLabel(title: "환율 가격")
+    private let checkLabel = MainLabel(title: "조회시간")
+    let checkTimeLabel = MainLabel(title: "\(Date().formattedTime)")
+    private let remittanceAmountLabel = MainLabel(title: "송금액 :")
     
     let amountTextField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .yellow
+        textField.backgroundColor = .gray
         textField.keyboardType = .numberPad
+        textField.borderStyle = .line
+        textField.layer.cornerRadius = 5
+        textField.layer.masksToBounds = true
+        textField.addLeftPadding()
         return textField
     }()
     
-    let usdLabel: UILabel = {
-        let label = UILabel()
-        label.text = "USD"
-        return label
-    }()
-    
-    lazy var priceInformationLabel: UILabel = {
-        let label = UILabel()
-        label.text = "가격은"
-        return label
-    }()
-    
+    let usdLabel = MainLabel(title: "USD")
+    let priceInformationLabel = MainLabel(title: "금액을 입력해주세요.")
     let pickerView: UIPickerView = {
-       let picker = UIPickerView()
+        let picker = UIPickerView()
         return picker
     }()
     
+    // MARK: Initializing
+
     required override init(frame: CGRect) {
         super.init(frame: frame)
         self.setStyle()
@@ -97,6 +50,8 @@ final class ExchangeRateView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+// MARK: Functions
 
 private extension ExchangeRateView {
     func setStyle() {
@@ -150,11 +105,10 @@ private extension ExchangeRateView {
         
         NSLayoutConstraint.activate([priceInformationLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
                                      priceInformationLabel.topAnchor.constraint(equalTo: usdLabel.bottomAnchor, constant: 30)])
-
+        
         NSLayoutConstraint.activate([pickerView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
                                      pickerView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
                                      pickerView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
                                      pickerView.heightAnchor.constraint(equalToConstant: 300)])
-
     }
 }

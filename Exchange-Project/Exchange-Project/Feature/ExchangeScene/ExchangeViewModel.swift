@@ -8,28 +8,22 @@
 import Combine
 import Foundation
 
-@frozen
-enum Nation: String {
-    case KRW = "USDKRW"
-    case JPY = "USDJPY"
-    case PHP = "USDPHP"
-}
-
-struct Quote {
-    let currencyCode: String
-    let exchangeRate: Double
-}
-
 final class ExchangeViewModel: ViewModelType {
+    // MARK: Properties
+
     private var networkProvider: ExchangeRateServiceType
     private var cancelBag = CancelBag()
     private var quote: [Quote] = []
     private var selectedNation = CurrentValueSubject<Nation, Never>(.KRW)
     
+    // MARK: Dependency
+    
     init(networkProvider: ExchangeRateServiceType) {
         self.networkProvider = networkProvider
     }
     
+    // MARK: Input & Output
+
     struct Input {
         let viewDidLoadEvent: AnyPublisher<Void, Never>
         let nationIsSelected: AnyPublisher<Nation, Never>
@@ -39,14 +33,16 @@ final class ExchangeViewModel: ViewModelType {
     struct Output {
         let selectedPrice: AnyPublisher<String, Never>
         let totalPriceInformation: AnyPublisher<String, Never>
-        let showToastMessage: AnyPublisher<ErrorMessage, Never>
+        let showToastMessage: AnyPublisher<ToastError, Never>
     }
     
+    // MARK: Function
+
     func transform(from input: Input, cancelBag: CancelBag) -> Output {
         lazy var price = PassthroughSubject<Double, Never>()
         lazy var priceAmount = PassthroughSubject<String, Never>()
         lazy var totalPriceAmount = PassthroughSubject<String, Never>()
-        lazy var showToastCase = PassthroughSubject<ErrorMessage, Never>()
+        lazy var showToastCase = PassthroughSubject<ToastError, Never>()
 
         let output = Output(selectedPrice: priceAmount.eraseToAnyPublisher(),
                             totalPriceInformation: totalPriceAmount.eraseToAnyPublisher(), showToastMessage: showToastCase.eraseToAnyPublisher())
@@ -61,13 +57,12 @@ final class ExchangeViewModel: ViewModelType {
             .sink(receiveValue: { [weak self] responseData in
                 guard let self else { return }
                 self.quote = responseData.quoteObjects
-                print(responseData)
                 if let koreaExchangeRate = self.quote.first(where: { $0.currencyCode == "USDKRW" }) {
                     priceAmount.send("\(koreaExchangeRate.exchangeRate.formattedString()) KRW / USD")
                     price.send(koreaExchangeRate.exchangeRate)
                 }
             })
-            .store(in: cancelBag)
+            .store(in: self.cancelBag)
         
         input.nationIsSelected
             .flatMap { data -> AnyPublisher<Quote?, Never> in
@@ -79,6 +74,7 @@ final class ExchangeViewModel: ViewModelType {
                     .eraseToAnyPublisher()
             }
             .sink { quote in
+                totalPriceAmount.send("금액을 입력해주세요.")
                 if let quote {
                     switch quote.currencyCode {
                     case "USDKRW":
@@ -106,8 +102,6 @@ final class ExchangeViewModel: ViewModelType {
                 return input * price
             }
             .sink { resultValue in
-               
-                
                 switch self.selectedNation.value {
                 case .KRW:
                     totalPriceAmount.send("수취금액은 \(resultValue.formattedString()) KRW 입니다")

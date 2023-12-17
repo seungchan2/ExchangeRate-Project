@@ -16,7 +16,7 @@ open class CancelBag {
         subscriptions.removeAll()
     }
     
-    public init() { }
+    public init() {}
 }
 
 extension AnyCancellable {
