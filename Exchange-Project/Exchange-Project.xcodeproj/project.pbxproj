@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC67712F2B2EE22A003B330B /* Date +.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC67712E2B2EE22A003B330B /* Date +.swift */; };
+		EC6771342B2EE3DC003B330B /* UITextField +.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6771332B2EE3DC003B330B /* UITextField +.swift */; };
+		EC6771362B2F2A32003B330B /* MainLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6771352B2F2A32003B330B /* MainLabel.swift */; };
+		EC67713C2B2F396B003B330B /* QuotoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC67713B2B2F396B003B330B /* QuotoDTO.swift */; };
+		EC67713F2B2F398F003B330B /* Nation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC67713E2B2F398F003B330B /* Nation.swift */; };
+		EC6771412B2F39B4003B330B /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6771402B2F39B4003B330B /* NetworkError.swift */; };
+		EC6771432B2F39E0003B330B /* ToastError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6771422B2F39E0003B330B /* ToastError.swift */; };
 		ECBF85422B283C1300D7C85D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBF85412B283C1300D7C85D /* AppDelegate.swift */; };
 		ECBF85442B283C1300D7C85D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBF85432B283C1300D7C85D /* SceneDelegate.swift */; };
 		ECBF854B2B283C1600D7C85D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECBF854A2B283C1600D7C85D /* Assets.xcassets */; };
@@ -46,6 +53,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EC67712E2B2EE22A003B330B /* Date +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date +.swift"; sourceTree = "<group>"; };
+		EC6771332B2EE3DC003B330B /* UITextField +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField +.swift"; sourceTree = "<group>"; };
+		EC6771352B2F2A32003B330B /* MainLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLabel.swift; sourceTree = "<group>"; };
+		EC67713B2B2F396B003B330B /* QuotoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotoDTO.swift; sourceTree = "<group>"; };
+		EC67713E2B2F398F003B330B /* Nation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nation.swift; sourceTree = "<group>"; };
+		EC6771402B2F39B4003B330B /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		EC6771422B2F39E0003B330B /* ToastError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastError.swift; sourceTree = "<group>"; };
 		ECBF853E2B283C1300D7C85D /* Exchange-Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Exchange-Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECBF85412B283C1300D7C85D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECBF85432B283C1300D7C85D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +111,72 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC6771372B2F38F4003B330B /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				ECBF857E2B2846E200D7C85D /* ViewModelType.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		EC6771382B2F38FC003B330B /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				EC67712E2B2EE22A003B330B /* Date +.swift */,
+				EC6771332B2EE3DC003B330B /* UITextField +.swift */,
+				ECBF85992B2A112100D7C85D /* UIViewController +.swift */,
+				ECBF85922B29B9E800D7C85D /* Double +.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		EC6771392B2F390C003B330B /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				ECBF85842B28503F00D7C85D /* Config.xcconfig */,
+				ECBF85882B2850B600D7C85D /* Config.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		EC67713A2B2F3936003B330B /* Combine+ */ = {
+			isa = PBXGroup;
+			children = (
+				ECBF85802B2846F700D7C85D /* CancelBag.swift */,
+				ECBF85902B29934300D7C85D /* UITextField + Publisher.swift */,
+			);
+			path = "Combine+";
+			sourceTree = "<group>";
+		};
+		EC67713D2B2F3982003B330B /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				EC67713E2B2F398F003B330B /* Nation.swift */,
+				EC6771402B2F39B4003B330B /* NetworkError.swift */,
+				EC6771422B2F39E0003B330B /* ToastError.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		EC6771442B2F3A38003B330B /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				ECBF85972B2A0B8000D7C85D /* ToastView.swift */,
+				EC6771352B2F2A32003B330B /* MainLabel.swift */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		EC6771452B2F3A49003B330B /* ExchangeScene */ = {
+			isa = PBXGroup;
+			children = (
+				ECBF85712B283CB300D7C85D /* ExchangeRateViewController.swift */,
+				ECBF857B2B28461600D7C85D /* ExchangeViewModel.swift */,
+				ECBF858B2B285AD700D7C85D /* ExchangeRateView.swift */,
+			);
+			path = ExchangeScene;
+			sourceTree = "<group>";
+		};
 		ECBF85352B283C1300D7C85D = {
 			isa = PBXGroup;
 			children = (
@@ -120,13 +200,12 @@
 		ECBF85402B283C1300D7C85D /* Exchange-Project */ = {
 			isa = PBXGroup;
 			children = (
+				ECBF85732B283D5D00D7C85D /* App */,
 				ECBF85762B283E7200D7C85D /* Service */,
 				ECBF858A2B28539000D7C85D /* Model */,
-				ECBF85832B28502F00D7C85D /* Core */,
-				ECBF857D2B2846D500D7C85D /* Util */,
+				ECBF857D2B2846D500D7C85D /* Core */,
 				ECBF85752B283D8600D7C85D /* Feature */,
 				ECBF85742B283D6A00D7C85D /* Resource */,
-				ECBF85732B283D5D00D7C85D /* App */,
 			);
 			path = "Exchange-Project";
 			sourceTree = "<group>";
@@ -160,6 +239,7 @@
 		ECBF85742B283D6A00D7C85D /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				EC6771392B2F390C003B330B /* Config */,
 				ECBF854A2B283C1600D7C85D /* Assets.xcassets */,
 				ECBF854C2B283C1600D7C85D /* LaunchScreen.storyboard */,
 				ECBF854F2B283C1600D7C85D /* Info.plist */,
@@ -170,9 +250,7 @@
 		ECBF85752B283D8600D7C85D /* Feature */ = {
 			isa = PBXGroup;
 			children = (
-				ECBF85712B283CB300D7C85D /* ExchangeRateViewController.swift */,
-				ECBF857B2B28461600D7C85D /* ExchangeViewModel.swift */,
-				ECBF858B2B285AD700D7C85D /* ExchangeRateView.swift */,
+				EC6771452B2F3A49003B330B /* ExchangeScene */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -185,24 +263,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		ECBF857D2B2846D500D7C85D /* Util */ = {
+		ECBF857D2B2846D500D7C85D /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				ECBF857E2B2846E200D7C85D /* ViewModelType.swift */,
-				ECBF85802B2846F700D7C85D /* CancelBag.swift */,
-				ECBF85842B28503F00D7C85D /* Config.xcconfig */,
-				ECBF85882B2850B600D7C85D /* Config.swift */,
-				ECBF85902B29934300D7C85D /* UITextField + Publisher.swift */,
-				ECBF85922B29B9E800D7C85D /* Double +.swift */,
-				ECBF85992B2A112100D7C85D /* UIViewController +.swift */,
-				ECBF85972B2A0B8000D7C85D /* ToastView.swift */,
-			);
-			path = Util;
-			sourceTree = "<group>";
-		};
-		ECBF85832B28502F00D7C85D /* Core */ = {
-			isa = PBXGroup;
-			children = (
+				EC6771442B2F3A38003B330B /* UIComponents */,
+				EC67713D2B2F3982003B330B /* Enum */,
+				EC67713A2B2F3936003B330B /* Combine+ */,
+				EC6771382B2F38FC003B330B /* Extension */,
+				EC6771372B2F38F4003B330B /* Protocol */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -211,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				ECBF85792B2845B900D7C85D /* ExchangeResponseData.swift */,
+				EC67713B2B2F396B003B330B /* QuotoDTO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -345,19 +414,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC6771342B2EE3DC003B330B /* UITextField +.swift in Sources */,
 				ECBF85822B28494400D7C85D /* ExchangeRateViewController.swift in Sources */,
 				ECBF859A2B2A112100D7C85D /* UIViewController +.swift in Sources */,
 				ECBF857A2B2845B900D7C85D /* ExchangeResponseData.swift in Sources */,
+				EC67713C2B2F396B003B330B /* QuotoDTO.swift in Sources */,
 				ECBF85892B2850B600D7C85D /* Config.swift in Sources */,
 				ECBF85932B29B9E800D7C85D /* Double +.swift in Sources */,
+				EC6771432B2F39E0003B330B /* ToastError.swift in Sources */,
+				EC6771362B2F2A32003B330B /* MainLabel.swift in Sources */,
 				ECBF857C2B28461600D7C85D /* ExchangeViewModel.swift in Sources */,
+				EC6771412B2F39B4003B330B /* NetworkError.swift in Sources */,
 				ECBF85812B2846F700D7C85D /* CancelBag.swift in Sources */,
 				ECBF858C2B285AD700D7C85D /* ExchangeRateView.swift in Sources */,
 				ECBF85982B2A0B8000D7C85D /* ToastView.swift in Sources */,
 				ECBF85912B29934300D7C85D /* UITextField + Publisher.swift in Sources */,
+				EC67712F2B2EE22A003B330B /* Date +.swift in Sources */,
 				ECBF85422B283C1300D7C85D /* AppDelegate.swift in Sources */,
 				ECBF85442B283C1300D7C85D /* SceneDelegate.swift in Sources */,
 				ECBF85782B283E8100D7C85D /* ExchangeRateService.swift in Sources */,
+				EC67713F2B2F398F003B330B /* Nation.swift in Sources */,
 				ECBF857F2B2846E200D7C85D /* ViewModelType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -504,6 +580,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
